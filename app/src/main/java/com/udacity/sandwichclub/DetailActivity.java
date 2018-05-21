@@ -69,24 +69,34 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI(Sandwich sandwich) {
         // Resource intensive findViewById lives in onCreate for one time population
-        originTv.append(" " + sandwich.getPlaceOfOrigin());
+        if (sandwich.getPlaceOfOrigin().isEmpty()) {
+            originTv.append(" N/A");
+        } else {
+            originTv.append(" " + sandwich.getPlaceOfOrigin());
+        }
 
         // N/A shown only if entire list is empty
         if (sandwich.getAlsoKnownAs().isEmpty()) {
             alsoKnownTv.append("\nN/A");
-        }
-        for (String aka: sandwich.getAlsoKnownAs()) {
-            alsoKnownTv.append("\n" + aka);
+        } else {
+            for (String aka: sandwich.getAlsoKnownAs()) {
+                alsoKnownTv.append("\n" + aka);
+            }
         }
 
-        descriptionTv.append(" " + sandwich.getDescription());
+        if (sandwich.getDescription().isEmpty()) {
+            descriptionTv.append(" N/A");
+        } else {
+            descriptionTv.append(" " + sandwich.getDescription());
+        }
 
         // N/A only shown if entire list is empty
         if (sandwich.getIngredients().isEmpty()) {
             ingredientsTv.append("\nN/A");
-        }
-        for (String ingredient: sandwich.getIngredients()) {
-            ingredientsTv.append("\n" + ingredient);
+        } else {
+            for (String ingredient: sandwich.getIngredients()) {
+                ingredientsTv.append("\n" + ingredient);
+            }
         }
     }
 }
